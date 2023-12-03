@@ -58,7 +58,7 @@ def get_pdf_text() -> Optional[str]:
     """
     st.header("Document Upload")
     uploaded_file = st.file_uploader(
-        label="Here, upload your News PDF file you want the GPT to use to answer",
+        label="Here, upload your PhD research paper's PDF file you want the Virtual Assistant to use to answer",
         type="pdf"
     )
     if uploaded_file:
@@ -231,7 +231,7 @@ def main() -> None:
 
     init_messages()
 
-    st.header("Personal ChatGPT")
+    st.header("Virtual PhD Research Assistant")
     # Supervise user input
     if user_input := st.chat_input("Input your question!"):
         if qdrant:
@@ -246,7 +246,7 @@ def main() -> None:
             user_input_w_context = user_input
         st.session_state.messages.append(
             HumanMessage(content=user_input_w_context))
-        with st.spinner("ChatGPT is typing ..."):
+        with st.spinner("PhD assistant is typing ..."):
             answer, cost = get_answer(llm, st.session_state.messages)
         st.session_state.messages.append(AIMessage(content=answer))
         st.session_state.costs.append(cost)
